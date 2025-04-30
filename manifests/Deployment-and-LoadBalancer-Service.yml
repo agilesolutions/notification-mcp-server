@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: findata-deployment
+  name: notificationmcpserver-deployment
   labels:
-    app: findata
+    app: notificationmcpserver
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: findata
+      app: notificationmcpserver
   template:
     metadata:
-      # kubectl rollout history deployment/findata-deployment
+      # kubectl rollout history deployment/notificationmcpserver-deployment
       annotations:
         kubernetes.io/change-cause: "Updated image to #{VERSION}#"
       labels:
-        app: findata
+        app: notificationmcpserver
     spec:
       containers:
-        - name: findata
-          image: agilesolutions/findata:latest
+        - name: notificationmcpserver
+          image: agilesolutions/notificationmcpserver:latest
           ports:
             - containerPort: 80
           livenessProbe:
@@ -71,13 +71,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: findata-loadbalancer-service
+  name: notificationmcpserver-loadbalancer-service
   labels:
-    app: findata
+    app: notificationmcpserver
 spec:
   type: LoadBalancer
   selector:
-    app: findata
+    app: notificationmcpserver
   ports:
     - port: 80
       targetPort: 80
