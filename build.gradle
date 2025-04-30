@@ -52,6 +52,18 @@ dependencyManagement {
     }
 }
 
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.agilesolutions.mcp'
+            artifactId = 'notification-mcp-server'
+            version = '1.0.0'
+
+            from components.java
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 }
